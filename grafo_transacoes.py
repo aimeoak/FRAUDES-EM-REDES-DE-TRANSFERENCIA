@@ -45,7 +45,76 @@ class Grafo:
         num_recebido = len(self.lista_transacoes_recebidas(conta_id))
         return num_recebido
     
+    #Novas funçoes
+    def total_valor_enviado(self, conta_id):
+        transacoes = self.lista_transacoes_enviadas(conta_id)
 
+        total = 0
+        for t in transacoes:
+            total+= t.valor 
 
+        return total 
 
+    def total_valor_recebido(self, conta_id): 
+        transacoes = self.lista_transacoes_recebidas(conta_id)
+
+        total = 0
+        for t in transacoes:
+            total+= t.valor 
+
+        return total 
     
+    def existe_caminho(self, conta1,conta2):
+        
+        visitados = set()
+
+        def dfs(conta_atual):
+            if conta_atual == conta2: 
+                return True 
+
+            visitados.add(conta_atual)
+
+            transacoes = self.lista_transacoes_enviadas(conta_atual)
+
+            for t in transacoes:
+                vizinho = t.conta_destino 
+
+                if vizinho not in visitados: 
+                    if dfs(vizinho):
+                        return True 
+
+            return False 
+        
+        return dfs(conta1)
+    
+    def detectar_ciclo(self):
+
+        visitados = set()
+        pilha = set() 
+
+        def dfs(conta): 
+            visitados.add(conta)
+            pilha.add(conta)
+
+            transacoes = self.lista_transacoes_enviadas(conta)
+
+            for t in transacoes:
+
+                vizinho = t.conta_destino
+
+                if vizinho not in visitados:
+                    if dfs(vizinho): 
+                        return True
+
+                elif vizinho in pilha:
+                        return True  
+            
+            pilha.remove(conta)
+        
+            return False 
+    
+        for conta in self.contas:
+            if conta not in visitados: 
+                if dfs(conta):
+                    return True 
+        return False

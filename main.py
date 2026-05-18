@@ -19,3 +19,8 @@ class gerenciador:
         print(g.grau("G1"))
         print(g.grau_entrada("G1"))
         print(g.grau_saida("G1"))
+        #testes das novas funções
+        print(g.total_valor_enviado("G1"))
+        print(g.total_valor_recebido("G1"))
+        print(g.existe_caminho("G1","B3"))
+        print(g.detectar_ciclo())
