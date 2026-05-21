@@ -20,7 +20,13 @@ if __name__ == "__main__":
     
     
     print(f"Existe caminho conectando N1 (alto valor) a A1? {'SIM' if g.existe_caminho('N1', 'A1') else 'NÃO'}")
+    print("\n===== SCORE SUSPEITO =====")
 
+    for conta in g.contas:
+
+        score = g.pontuacao_suspeita(conta)
+
+        print(conta, "->", score)
     
     print("ONTOLOGIA")
     onto_manager = GerenciadorOntologia()

@@ -118,3 +118,83 @@ class Grafo:
                 if dfs(conta):
                     return True 
         return False
+
+    def participa_ciclo(self, conta_inicial):
+
+        visitados = set()
+        pilha = set()
+
+        def dfs(conta):
+
+            visitados.add(conta)
+            pilha.add(conta)
+
+            transacoes = self.lista_transacoes_enviadas(conta)
+
+            for t in transacoes:
+
+                vizinho = t.conta_destino
+
+                if vizinho == conta_inicial:
+                    return True
+
+                if vizinho not in visitados:
+                    if dfs(vizinho):
+                        return True
+
+            pilha.remove(conta)
+
+            return False
+
+        return dfs(conta_inicial)
+    def pontuacao_suspeita(self, conta_id):
+
+        pontos = 0
+
+        grau = self.grau(conta_id)
+
+        enviado = self.total_valor_enviado(conta_id)
+
+        recebido = self.total_valor_recebido(conta_id)
+
+        diferenca = abs(enviado - recebido)
+
+
+        # Participa de ciclo
+        if self.participa_ciclo(conta_id):
+            pontos += 10
+
+
+        # Grau muito alto
+        if grau > 5:
+            pontos += 10
+
+        if grau > 10:
+            pontos += 15
+
+
+        # Muitas saídas
+        if self.grau_saida(conta_id) > 5:
+            pontos += 10
+
+
+        # Muito dinheiro movimentado
+        if enviado > 5000:
+            pontos += 10
+
+        if enviado > 10000:
+            pontos += 15
+
+
+        # Recebe e envia valores muito parecidos
+        # comportamento típico de conta intermediária
+        if diferenca < 100:
+            pontos += 15
+
+
+        # Recebe muito e envia quase tudo
+        if recebido > 3000 and enviado > 0.9*recebido:
+            pontos += 15
+
+
+        return min(pontos,100)
