@@ -1,0 +1,525 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xml:base="http://projetografo.com/financeiro.owl"
+         xmlns="http://projetografo.com/financeiro.owl#">
+
+<owl:Ontology rdf:about="http://projetografo.com/financeiro.owl"/>
+
+<owl:ObjectProperty rdf:about="#origina_transacao">
+  <rdfs:domain rdf:resource="#Conta"/>
+  <rdfs:range rdf:resource="#Transacao"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#recebe_transacao">
+  <rdfs:domain rdf:resource="#Transacao"/>
+  <rdfs:range rdf:resource="#Conta"/>
+</owl:ObjectProperty>
+
+<owl:DatatypeProperty rdf:about="#possui_valor">
+  <rdfs:domain rdf:resource="#Transacao"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+</owl:DatatypeProperty>
+
+<owl:Class rdf:about="#Entidade">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#PessoaFisica">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#PessoaJuridica">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Conta">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ContaCorrente">
+  <rdfs:subClassOf rdf:resource="#Conta"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ContaFantasma">
+  <rdfs:subClassOf rdf:resource="#Conta"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Transacao">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:NamedIndividual rdf:about="#A1">
+  <rdf:type rdf:resource="#ContaCorrente"/>
+  <origina_transacao rdf:resource="#Transacao_A1_para_B1_0"/>
+  <origina_transacao rdf:resource="#Transacao_A1_para_D3_20"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#B1">
+  <rdf:type rdf:resource="#ContaCorrente"/>
+  <origina_transacao rdf:resource="#Transacao_B1_para_C1_1"/>
+  <origina_transacao rdf:resource="#Transacao_B1_para_B2_26"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#C1">
+  <rdf:type rdf:resource="#ContaCorrente"/>
+  <origina_transacao rdf:resource="#Transacao_C1_para_A1_2"/>
+  <origina_transacao rdf:resource="#Transacao_C1_para_C2_27"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#A2">
+  <rdf:type rdf:resource="#ContaCorrente"/>
+  <origina_transacao rdf:resource="#Transacao_A2_para_B2_3"/>
+  <origina_transacao rdf:resource="#Transacao_A2_para_A3_25"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#B2">
+  <rdf:type rdf:resource="#ContaCorrente"/>
+  <origina_transacao rdf:resource="#Transacao_B2_para_C2_4"/>
+  <origina_transacao rdf:resource="#Transacao_B2_para_E3_21"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#C2">
+  <rdf:type rdf:resource="#ContaCorrente"/>
+  <origina_transacao rdf:resource="#Transacao_C2_para_D2_5"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#D2">
+  <rdf:type rdf:resource="#ContaCorrente"/>
+  <origina_transacao rdf:resource="#Transacao_D2_para_A2_6"/>
+  <origina_transacao rdf:resource="#Transacao_D2_para_G1_23"/>
+  <origina_transacao rdf:resource="#Transacao_D2_para_F1_43"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#A3">
+  <rdf:type rdf:resource="#ContaCorrente"/>
+  <origina_transacao rdf:resource="#Transacao_A3_para_B3_7"/>
+  <origina_transacao rdf:resource="#Transacao_A3_para_C3_8"/>
+  <origina_transacao rdf:resource="#Transacao_A3_para_D3_9"/>
+  <origina_transacao rdf:resource="#Transacao_A3_para_E3_10"/>
+  <origina_transacao rdf:resource="#Transacao_A3_para_N1_40"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#B3">
+  <rdf:type rdf:resource="#ContaCorrente"/>
+  <origina_transacao rdf:resource="#Transacao_B3_para_O1_41"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#C3">
+  <rdf:type rdf:resource="#ContaCorrente"/>
+  <origina_transacao rdf:resource="#Transacao_C3_para_F1_22"/>
+  <origina_transacao rdf:resource="#Transacao_C3_para_A2_42"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#D3">
+  <rdf:type rdf:resource="#ContaCorrente"/>
+  <origina_transacao rdf:resource="#Transacao_D3_para_D2_28"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#E3">
+  <rdf:type rdf:resource="#ContaCorrente"/>
+  <origina_transacao rdf:resource="#Transacao_E3_para_H1_24"/>
+  <origina_transacao rdf:resource="#Transacao_E3_para_E1_29"/>
+  <origina_transacao rdf:resource="#Transacao_E3_para_G1_44"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#F1">
+  <rdf:type rdf:resource="#ContaCorrente"/>
+  <origina_transacao rdf:resource="#Transacao_F1_para_G1_11"/>
+  <origina_transacao rdf:resource="#Transacao_F1_para_A1_30"/>
+  <origina_transacao rdf:resource="#Transacao_F1_para_H1_45"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#G1">
+  <rdf:type rdf:resource="#ContaCorrente"/>
+  <origina_transacao rdf:resource="#Transacao_G1_para_H1_12"/>
+  <origina_transacao rdf:resource="#Transacao_G1_para_B1_31"/>
+  <origina_transacao rdf:resource="#Transacao_G1_para_I1_46"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#H1">
+  <rdf:type rdf:resource="#ContaCorrente"/>
+  <origina_transacao rdf:resource="#Transacao_H1_para_I1_13"/>
+  <origina_transacao rdf:resource="#Transacao_H1_para_C1_32"/>
+  <origina_transacao rdf:resource="#Transacao_H1_para_A3_47"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#I1">
+  <rdf:type rdf:resource="#ContaCorrente"/>
+  <origina_transacao rdf:resource="#Transacao_I1_para_J1_33"/>
+  <origina_transacao rdf:resource="#Transacao_I1_para_B3_48"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#J1">
+  <rdf:type rdf:resource="#ContaCorrente"/>
+  <origina_transacao rdf:resource="#Transacao_J1_para_K1_14"/>
+  <origina_transacao rdf:resource="#Transacao_J1_para_K1_34"/>
+  <origina_transacao rdf:resource="#Transacao_J1_para_A1_49"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#K1">
+  <rdf:type rdf:resource="#ContaCorrente"/>
+  <origina_transacao rdf:resource="#Transacao_K1_para_L1_15"/>
+  <origina_transacao rdf:resource="#Transacao_K1_para_L1_35"/>
+  <origina_transacao rdf:resource="#Transacao_K1_para_B2_50"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#L1">
+  <rdf:type rdf:resource="#ContaCorrente"/>
+  <origina_transacao rdf:resource="#Transacao_L1_para_M1_16"/>
+  <origina_transacao rdf:resource="#Transacao_L1_para_M1_36"/>
+  <origina_transacao rdf:resource="#Transacao_L1_para_C3_51"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#M1">
+  <rdf:type rdf:resource="#ContaCorrente"/>
+  <origina_transacao rdf:resource="#Transacao_M1_para_J1_17"/>
+  <origina_transacao rdf:resource="#Transacao_M1_para_N1_37"/>
+  <origina_transacao rdf:resource="#Transacao_M1_para_D2_52"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#N1">
+  <rdf:type rdf:resource="#ContaCorrente"/>
+  <origina_transacao rdf:resource="#Transacao_N1_para_O1_18"/>
+  <origina_transacao rdf:resource="#Transacao_N1_para_A1_38"/>
+  <origina_transacao rdf:resource="#Transacao_N1_para_E3_53"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#O1">
+  <rdf:type rdf:resource="#ContaCorrente"/>
+  <origina_transacao rdf:resource="#Transacao_O1_para_N1_19"/>
+  <origina_transacao rdf:resource="#Transacao_O1_para_B1_39"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#E1">
+  <rdf:type rdf:resource="#ContaCorrente"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_A1_para_B1_0">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#B1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">500.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_B1_para_C1_1">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#C1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">480.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_C1_para_A1_2">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#A1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">470.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_A2_para_B2_3">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#B2"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1000.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_B2_para_C2_4">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#C2"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">995.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_C2_para_D2_5">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#D2"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">990.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_D2_para_A2_6">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#A2"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">980.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_A3_para_B3_7">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#B3"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">50.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_A3_para_C3_8">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#C3"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">60.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_A3_para_D3_9">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#D3"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">55.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_A3_para_E3_10">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#E3"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">65.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_F1_para_G1_11">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#G1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2000.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_G1_para_H1_12">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#H1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1990.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_H1_para_I1_13">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#I1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1985.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_J1_para_K1_14">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#K1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">100.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_K1_para_L1_15">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#L1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">100.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_L1_para_M1_16">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#M1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">100.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_M1_para_J1_17">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#J1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">100.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_N1_para_O1_18">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#O1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">7000.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_O1_para_N1_19">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#N1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">7000.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_A1_para_D3_20">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#D3"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">120.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_B2_para_E3_21">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#E3"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">130.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_C3_para_F1_22">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#F1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">140.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_D2_para_G1_23">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#G1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">150.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_E3_para_H1_24">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#H1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">160.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_A2_para_A3_25">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#A3"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">300.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_B1_para_B2_26">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#B2"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">320.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_C1_para_C2_27">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#C2"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">340.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_D3_para_D2_28">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#D2"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">360.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_E3_para_E1_29">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#E1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">380.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_F1_para_A1_30">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#A1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2100.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_G1_para_B1_31">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#B1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2200.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_H1_para_C1_32">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#C1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2300.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_I1_para_J1_33">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#J1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">400.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_J1_para_K1_34">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#K1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">410.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_K1_para_L1_35">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#L1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">420.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_L1_para_M1_36">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#M1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">430.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_M1_para_N1_37">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#N1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">440.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_N1_para_A1_38">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#A1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">4500.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_O1_para_B1_39">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#B1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">4600.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_A3_para_N1_40">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#N1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">75.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_B3_para_O1_41">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#O1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">85.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_C3_para_A2_42">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#A2"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">95.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_D2_para_F1_43">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#F1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">600.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_E3_para_G1_44">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#G1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">610.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_F1_para_H1_45">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#H1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">620.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_G1_para_I1_46">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#I1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">630.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_H1_para_A3_47">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#A3"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">640.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_I1_para_B3_48">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#B3"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">650.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_J1_para_A1_49">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#A1"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">660.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_K1_para_B2_50">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#B2"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">670.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_L1_para_C3_51">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#C3"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">680.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_M1_para_D2_52">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#D2"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">690.0</possui_valor>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Transacao_N1_para_E3_53">
+  <rdf:type rdf:resource="#Transacao"/>
+  <recebe_transacao rdf:resource="#E3"/>
+  <possui_valor rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">700.0</possui_valor>
+</owl:NamedIndividual>
+
+
+</rdf:RDF>
