@@ -16,8 +16,7 @@ class GerenciadorOntologia:
 
             class Conta(Thing): pass
             class ContaCorrente(Conta): pass
-            # Conta fantasma é usada para marcar uma conta suspeita/ que faz fraudes
-            class ContaFantasma(Conta): pass
+            class ContaSuspeita(Conta):pass
             class ContaLaranja(Conta): pass
 
             class Transacao(Thing): pass
@@ -38,6 +37,7 @@ class GerenciadorOntologia:
             class possui_valor(DataProperty):
                 domain = [Transacao]
                 range = [float]
+        
     
     def povoar_com_grafo(self, grafo):
         #Transforama dados do grafo em individuos da ontologia
@@ -69,7 +69,7 @@ class GerenciadorOntologia:
             recebido = grafo.total_valor_recebido(conta_id)
             entradas = grafo.grau_entrada(conta_id)
             saidas = grafo.grau_saida(conta_id)
-
+            pontuacao_suspeita = grafo.pontuacao_suspeita(conta_id)
             
             conta_owl = self.onto.ContaCorrente(conta_id) 
 
@@ -80,14 +80,10 @@ class GerenciadorOntologia:
                 if taxa_repasse >= 0.80:  #Repassou 80% ou mais do que recebeu
                     conta_owl.is_a.append(self.onto.ContaLaranja)
 
-            #CONTA FANTASMA
-            #Alto volume de dinheiro entrando e saindo, saldo final mascarado
-            if recebido >= 2000 and enviado >= 2000:
-                margem_diferenca = abs(recebido - enviado)
-                # Se a diferença entre entrada e saída for menor que 10% do total
-                if margem_diferenca <= (recebido * 0.1): 
-                    conta_owl.is_a.append(self.onto.ContaFantasma)
-
+            #CONTA SUSPEITA 
+            #Parâmetros do score 
+            if pontuacao_suspeita>=50: 
+                conta_owl.is_a.append(self.onto.ContaSuspeita)
        
 
     def salvar_arquivo(self, nome_arquivo="minha_ontologia.owl"):

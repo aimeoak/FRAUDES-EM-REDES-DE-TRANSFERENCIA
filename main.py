@@ -42,16 +42,17 @@ if __name__ == "__main__":
     
     
     laranjas = onto_manager.onto.ContaLaranja.instances()
-    fantasmas = onto_manager.onto.ContaFantasma.instances()
+    suspeitas = onto_manager.onto.ContaSuspeita.instances()
 
     print(f"\n[!] Contas tipo 'Laranja' ({len(laranjas)} detectadas):")
     if not laranjas: print(" -> Nenhuma")
     for c in laranjas:
         print(f" -> {c.name}")
-
-    print(f"\n[!] Contas tipo 'Fantasma' ({len(fantasmas)} detectadas):")
-    if not fantasmas: print(" -> Nenhuma")
-    for c in fantasmas:
+    
+    
+    print(f"\n[!] Contas tipo 'Suspeitas' ({len(suspeitas)} detectadas):")
+    if not suspeitas: print(" -> Nenhuma")
+    for c in suspeitas:
         print(f" -> {c.name}")
 
     print("\n=============================================")
