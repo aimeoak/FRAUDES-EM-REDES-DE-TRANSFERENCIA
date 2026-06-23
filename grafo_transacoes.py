@@ -148,53 +148,56 @@ class Grafo:
 
         return dfs(conta_inicial)
     def pontuacao_suspeita(self, conta_id):
-
         pontos = 0
-
-        grau = self.grau(conta_id)
-
+        
+        grau_total = self.grau(conta_id)
+        saidas = self.grau_saida(conta_id)
         enviado = self.total_valor_enviado(conta_id)
-
         recebido = self.total_valor_recebido(conta_id)
 
-        diferenca = abs(enviado - recebido)
+        todos_enviados = [self.total_valor_enviado(c) for c in self.contas if self.total_valor_enviado(c) > 0]
+        todos_enviados.sort()
 
+        if len(todos_enviados) > 0:
+            indice_p75 = int(len(todos_enviados) * 0.75)
+            indice_p90 = int(len(todos_enviados) * 0.90)
+            
+            limite_volume_alto = todos_enviados[indice_p75]    # Os 25% que mais enviam
+            limite_volume_extremo = todos_enviados[indice_p90] # Os 10% que mais enviam
+        else:
+            limite_volume_alto = float('inf')
+            limite_volume_extremo = float('inf')
 
-        # Participa de ciclo
+        
+        #Lavagem
         if self.participa_ciclo(conta_id):
+            pontos += 40 
+
+        #Muitas interações
+        if grau_total > 5:
+            pontos += 10
+        if grau_total > 10:
+            pontos += 15 
+            
+        if saidas > 5:
             pontos += 10
 
+        
+        if recebido > 0:
+            # Repasse Alto
+            if enviado >= (recebido * 0.90):
+                pontos += 20
+                
+            # Conta Ponte
+            diferenca = abs(enviado - recebido)
+            limite_taxa = recebido * 0.05 
+            if diferenca <= limite_taxa:
+                pontos += 15
 
-        # Grau muito alto
-        if grau > 5:
+        if enviado >= limite_volume_alto:
             pontos += 10
+            
+        if enviado >= limite_volume_extremo:
+            pontos += 15 
 
-        if grau > 10:
-            pontos += 15
-
-
-        # Muitas saídas
-        if self.grau_saida(conta_id) > 5:
-            pontos += 10
-
-
-        # Muito dinheiro movimentado
-        if enviado > 5000:
-            pontos += 10
-
-        if enviado > 10000:
-            pontos += 15
-
-
-        # Recebe e envia valores muito parecidos
-        # comportamento típico de conta intermediária
-        if diferenca < 100:
-            pontos += 15
-
-
-        # Recebe muito e envia quase tudo
-        if recebido > 3000 and enviado > 0.9*recebido:
-            pontos += 15
-
-
-        return min(pontos,100)
+        return min(pontos, 100)
