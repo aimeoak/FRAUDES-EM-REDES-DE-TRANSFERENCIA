@@ -137,6 +137,34 @@ with tab2:
     st.header("Análise Estrutural (Apenas Conexões)")
     st.write("Aqui o algoritmo enxerga apenas a topologia da rede. Como ainda não aplicamos as regras da Ontologia, todos os nós são vistos da mesma forma, sem distinção de risco.")
     
+    st.subheader("Métricas Estruturais da Rede")
+
+    col_m1, col_m2, col_m3, col_m4 = st.columns(4)
+
+    # 1 - Densidade
+    densidade = nx.density(G_estrutural)
+
+    # 2 - Grau médio
+    grau_medio = sum(dict(G_estrutural.degree()).values()) / G_estrutural.number_of_nodes()
+
+    # 3 - Clustering médio
+    clustering = nx.average_clustering(G_estrutural.to_undirected())
+
+    # 4 - PageRank máximo
+    pagerank = nx.pagerank(G_estrutural)
+    maior_pr = max(pagerank.values())
+
+    with col_m1:
+        st.metric("Densidade", f"{densidade:.3f}")
+
+    with col_m2:
+        st.metric("Grau Médio", f"{grau_medio:.2f}")
+
+    with col_m3:
+        st.metric("Clustering Médio", f"{clustering:.3f}")
+
+    with col_m4:
+        st.metric("Maior PageRank", f"{maior_pr:.3f}")
     col1, col2 = st.columns(2)
     with col1:
         st.subheader("Métrica: Contas com Mais Conexões")
@@ -160,6 +188,42 @@ with tab2:
                 st.write(f"**Ciclo {i+1}:** {caminho} -> {ciclo[0]}")
         else:
             st.success("Nenhum ciclo fechado detectado.")
+
+    st.subheader("Consulta de Caminho Mínimo")
+
+    origem = st.selectbox(
+        "Conta de origem",
+        sorted(list(G_estrutural.nodes())),
+        key="origem_estrutural"
+    )
+
+    destino = st.selectbox(
+        "Conta de destino",
+        sorted(list(G_estrutural.nodes())),
+        key="destino_estrutural"
+    )
+
+    if st.button("Calcular Caminho Mínimo (Estrutural)"):
+
+        try:
+            caminho = nx.shortest_path(
+                G_estrutural,
+                source=origem,
+                target=destino
+            )
+
+            st.success(
+                " ➜ ".join(map(str, caminho))
+            )
+
+            st.write(
+                f"Comprimento do caminho: {len(caminho)-1} arestas"
+            )
+
+        except nx.NetworkXNoPath:
+            st.error(
+                "Não existe caminho entre essas contas."
+            )
 
     st.subheader("Visualização Topológica (Sem Semântica)")
     
@@ -195,12 +259,83 @@ with tab3:
     with colC:
         st.info(f"🟠 **Suspeitas:** {', '.join(suspeitas) if suspeitas else 'Nenhuma'}")
     
-    st.subheader("Grafo Semântico Interativo")
-   
-    arq_html_semantico = desenhar_grafo_pyvis(G_semantico, "grafo_semantico.html", usar_semantica=True)
-    
-    with open(arq_html_semantico, 'r', encoding='utf-8') as f:
-        components.html(f.read(), height=700)
+    st.subheader("Consulta de Caminho Mínimo Semântico")
+
+    origem_sem = st.selectbox(
+        "Conta de origem",
+        sorted(list(G_semantico.nodes())),
+        key="origem_semantica"
+    )
+
+    destino_sem = st.selectbox(
+        "Conta de destino",
+        sorted(list(G_semantico.nodes())),
+        key="destino_semantica"
+    )
+
+    if st.button("Calcular Caminho Mínimo (Semântico)"):
+
+        try:
+            caminho = nx.shortest_path(
+                G_semantico,
+                source=origem_sem,
+                target=destino_sem
+            )
+
+            st.success(
+                " ➜ ".join(map(str, caminho))
+            )
+
+            st.write(
+                f"Comprimento do caminho: {len(caminho)-1} arestas"
+            )
+
+            # ----------------------------
+            # Interpretação semântica
+            # ----------------------------
+            st.subheader("Interpretação Semântica do Caminho")
+
+            for no in caminho:
+                tipo = G_semantico.nodes[no]["tipo_semantico"]
+                score = G_semantico.nodes[no]["score"]
+
+                st.write(
+                    f"**{no}** → {tipo} (Score: {score})"
+                )
+
+            tipos = [G_semantico.nodes[n]["tipo_semantico"] for n in caminho]
+
+            if "Conta Concentradora" in tipos:
+                st.error(
+                    "O caminho passa por uma conta concentradora, indicando possível concentração de recursos."
+                )
+
+            elif "Conta Laranja" in tipos:
+                st.warning(
+                    "O caminho atravessa contas laranja, sugerindo pulverização ou ocultação da origem dos recursos."
+                )
+
+            else:
+                st.success(
+                    "Nenhum comportamento suspeito foi identificado ao longo do caminho."
+                )
+
+        except nx.NetworkXNoPath:
+            st.error(
+                "Não existe caminho entre essas contas."
+            )
+
+# Grafo continua fora do botão
+st.subheader("Grafo Semântico Interativo")
+
+arq_html_semantico = desenhar_grafo_pyvis(
+    G_semantico,
+    "grafo_semantico.html",
+    usar_semantica=True
+)
+
+with open(arq_html_semantico, 'r', encoding='utf-8') as f:
+    components.html(f.read(), height=700)
 
 #CAMILA: ADC alguma relação com caminho mínimo/ complementar essa página
 with tab4:
