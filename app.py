@@ -96,6 +96,19 @@ def aplicar_ontologia(G):
 
     return G
 
+def peso_semantico(u, v, data, G):
+    peso_base = 1  # custo normal 
+    penalidade = 0
+    for no in (u, v):
+        tipo = G.nodes[no].get('tipo_semantico', 'Conta Normal')
+        if tipo == 'Conta Concentradora':
+            penalidade += 50
+        elif tipo == 'Conta Laranja':
+            penalidade += 30
+        elif tipo == 'Conta Suspeita':
+            penalidade += 15
+    return peso_base + penalidade
+
 
 def desenhar_grafo_pyvis(G, nome_arquivo, usar_semantica=False):
     net = Network(height='700px', width='100%', directed=True, bgcolor='#222222', font_color='white')
@@ -274,12 +287,12 @@ with tab3:
     )
 
     if st.button("Calcular Caminho Mínimo (Semântico)"):
-
         try:
-            caminho = nx.shortest_path(
+            caminho = nx.dijkstra_path(
                 G_semantico,
                 source=origem_sem,
-                target=destino_sem
+                target=destino_sem,
+                weight=lambda u, v, d: peso_semantico(u, v, d, G_semantico)
             )
 
             st.success(
